@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  nextjs-app:
+    build:
+      context: ./dream-team-selector
+      dockerfile: ../Dockerfile
+    container_name: nextjs-dev-container
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./dream-team-selector:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+    command: npm run dev
