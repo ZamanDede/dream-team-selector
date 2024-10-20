@@ -2,8 +2,6 @@
 FROM node:18-alpine AS deps
 WORKDIR /app
 COPY package*.json ./
-ARG NODE_ENV
-ENV NODE_ENV $NODE_ENV
 RUN npm install
 
 # Stage 2: Build the Application
@@ -13,7 +11,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
-# Stage 3: Run the Application
+# Stage 3: Run the Application (Production Stage)
 FROM node:18-alpine
 WORKDIR /app
 COPY --from=builder /app/.next ./.next
