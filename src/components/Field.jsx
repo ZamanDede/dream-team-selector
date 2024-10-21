@@ -33,7 +33,7 @@ const Field = ({ fieldCharacters, moveCharacter }) => {
       const nearestPosition = getNearestPosition(dropOffset);
       if (
         nearestPosition &&
-        !fieldCharacters.find((c) => c.position.id === nearestPosition.id)
+        !fieldCharacters.find((c) => c.position && c.position.id === nearestPosition.id)
       ) {
         setHoveredPosition(nearestPosition.id); // Set the hovered position
       } else {
@@ -49,7 +49,9 @@ const Field = ({ fieldCharacters, moveCharacter }) => {
     const nearestPosition = getNearestPosition(dropOffset);
     if (
       !nearestPosition ||
-      fieldCharacters.find((c) => c.position.id === nearestPosition.id)
+      fieldCharacters.find(
+        (c) => c.position && c.position.id === nearestPosition.id && c.id !== character.id
+      )
     ) {
       return; // Position is occupied or no nearest position, do nothing
     }
@@ -103,13 +105,17 @@ const Field = ({ fieldCharacters, moveCharacter }) => {
 
       {/* Render predefined positions */}
       {predefinedPositions.map((position) => {
-        const character = fieldCharacters.find((c) => c.position.id === position.id);
+        const character = fieldCharacters.find(
+          (c) => c.position && c.position.id === position.id
+        );
 
         return (
           <div
             key={position.id}
             className={`absolute border ${
-              hoveredPosition === position.id ? 'border-blue-400' : 'border-gray-600'
+              hoveredPosition === position.id
+                ? 'border-blue-400'
+                : 'border-gray-600'
             } rounded`}
             style={{
               top: `${position.y}%`,
@@ -121,7 +127,9 @@ const Field = ({ fieldCharacters, moveCharacter }) => {
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor:
-                hoveredPosition === position.id ? 'rgba(59, 130, 246, 0.5)' : 'transparent',
+                hoveredPosition === position.id
+                  ? 'rgba(59, 130, 246, 0.5)'
+                  : 'transparent',
             }}
           >
             {character ? (

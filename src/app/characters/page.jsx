@@ -1,3 +1,4 @@
+// src/app/characters/page.jsx
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -25,11 +26,6 @@ const CharactersPage = () => {
     fetchCharacters();
   }, []);
 
-  const addToSideline = (character) => {
-    console.log(`${character.name} added to sideline`);
-    // Logic to add character to sideline (possibly update global state)
-  };
-
   // Calculate the current set of characters to be displayed
   const indexOfLastCharacter = currentPage * charactersPerPage;
   const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
@@ -49,8 +45,8 @@ const CharactersPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4 text-center">Marvel Characters</h1>
+    <div className="container mx-auto p-4 bg-gray-900 min-h-screen">
+      <h1 className="text-3xl font-bold mb-4 text-center text-white">Marvel Characters</h1>
 
       {/* Character Search component to filter and sort characters */}
       <div className="mb-6">
@@ -65,7 +61,7 @@ const CharactersPage = () => {
           <CharacterCard
             key={character.id}
             character={character}
-            addToSideline={addToSideline}
+            variant="search" // Pass variant prop
           />
         ))}
       </div>
@@ -81,7 +77,7 @@ const CharactersPage = () => {
         >
           Previous
         </button>
-        <span className="text-lg font-bold">
+        <span className="text-lg font-bold text-white">
           Page {currentPage} of {Math.ceil(filteredCharacters.length / charactersPerPage)}
         </span>
         <button

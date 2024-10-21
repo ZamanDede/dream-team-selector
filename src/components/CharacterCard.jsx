@@ -1,8 +1,10 @@
+// src/components/CharacterCard.jsx
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 
-const CharacterCard = ({ character, addToSideline }) => {
+const CharacterCard = ({ character, addToSideline, variant }) => {
   const [showDescription, setShowDescription] = useState(false);
 
   return (
@@ -17,26 +19,42 @@ const CharacterCard = ({ character, addToSideline }) => {
           />
         )}
         <div className="space-x-4 mt-4">
-          {/* Info Button for Description */}
-          <button
-            onClick={() => setShowDescription(true)}
-            className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-300"
-          >
-            Info
-          </button>
+          {variant === 'create' && (
+            <>
+              {/* Info Button for Description */}
+              <button
+                onClick={() => setShowDescription(true)}
+                className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-300"
+              >
+                Info
+              </button>
 
-          {/* Add to Sideline Button */}
-          <button
-            onClick={() => addToSideline(character)}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition-colors duration-300"
-          >
-            Add to Sideline
-          </button>
+              {/* Add to Sideline Button */}
+              <button
+                onClick={() => addToSideline(character)}
+                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition-colors duration-300"
+              >
+                Add to Sideline
+              </button>
+            </>
+          )}
+
+          {variant === 'search' && (
+            <>
+              {/* View Details Button */}
+              <Link
+                href={`/characters/${character.id}`}
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-300 inline-block"
+              >
+                View Details
+              </Link>
+            </>
+          )}
         </div>
       </div>
 
       {/* Modal for Description */}
-      {showDescription && (
+      {variant === 'create' && showDescription && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
           <div className="bg-white p-8 rounded shadow-lg max-w-md w-full">
             <h3 className="text-xl font-bold mb-4">{character.name}</h3>
