@@ -1,7 +1,8 @@
+// src/components/Field.jsx
 "use client";
 
 import React, { useState, useRef } from 'react';
-import { useDrop } from 'react-dnd';
+import { useDrop, useDrag } from 'react-dnd';
 
 const predefinedPositions = [
   { id: 1, name: "GK", x: 50, y: 90 }, // Goalkeeper
@@ -16,8 +17,7 @@ const predefinedPositions = [
   { id: 10, name: "ST", x: 80, y: 30 }, // Right Attacker
 ];
 
-const Field = () => {
-  const [fieldCharacters, setFieldCharacters] = useState([]); // Store placed characters
+const Field = ({ fieldCharacters, moveCharacter }) => {
   const [hoveredPosition, setHoveredPosition] = useState(null); // Track hovered position
   const fieldRef = useRef(null); // Create a ref for the Field component
 
@@ -25,7 +25,7 @@ const Field = () => {
     accept: 'character',
     drop: (item, monitor) => {
       const dropOffset = monitor.getClientOffset(); // Get the mouse pointer location on drop
-      handleDrop(item.character, dropOffset);
+      handleDrop(item.character, dropOffset, item.from);
       setHoveredPosition(null); // Clear hover on drop
     },
     hover: (item, monitor) => {
@@ -45,11 +45,7 @@ const Field = () => {
     }),
   }));
 
-  const handleDrop = (character, dropOffset) => {
-    if (fieldCharacters.length >= 6) {
-      return;
-    }
-
+  const handleDrop = (character, dropOffset, from) => {
     const nearestPosition = getNearestPosition(dropOffset);
     if (
       !nearestPosition ||
@@ -58,12 +54,9 @@ const Field = () => {
       return; // Position is occupied or no nearest position, do nothing
     }
 
-    setFieldCharacters((prev) => {
-      if (prev.find((c) => c.id === character.id)) {
-        return prev;
-      }
-      return [...prev, { ...character, position: nearestPosition }];
-    });
+    // Add position to character
+    const characterWithPosition = { ...character, position: nearestPosition };
+    moveCharacter(characterWithPosition, from, 'field');
   };
 
   const getNearestPosition = (dropOffset) => {
@@ -95,11 +88,6 @@ const Field = () => {
     return nearestPosition;
   };
 
-  // Remove character from the field
-  const removeCharacter = (characterId) => {
-    setFieldCharacters((prev) => prev.filter((c) => c.id !== characterId));
-  };
-
   return (
     <div
       ref={(node) => {
@@ -114,44 +102,65 @@ const Field = () => {
       <h2 className="text-2xl font-bold text-center mb-4">Field</h2>
 
       {/* Render predefined positions */}
-      {predefinedPositions.map((position) => (
-        <div
-          key={position.id}
-          className={`absolute border ${
-            hoveredPosition === position.id ? 'border-blue-400' : 'border-gray-600'
-          } rounded`}
-          style={{
-            top: `${position.y}%`,
-            left: `${position.x}%`,
-            width: '60px',
-            height: '60px',
-            transform: 'translate(-50%, -50%)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor:
-              hoveredPosition === position.id ? 'rgba(59, 130, 246, 0.5)' : 'transparent',
-          }}
-        >
-          {fieldCharacters.find((c) => c.position.id === position.id) ? (
-            <div className="flex flex-col items-center">
-              <img
-                src={`${fieldCharacters.find((c) => c.position.id === position.id).thumbnail.path}.${fieldCharacters.find((c) => c.position.id === position.id).thumbnail.extension}`}
-                alt={fieldCharacters.find((c) => c.position.id === position.id).name}
-                className="w-12 h-12 rounded mb-2"
+      {predefinedPositions.map((position) => {
+        const character = fieldCharacters.find((c) => c.position.id === position.id);
+
+        return (
+          <div
+            key={position.id}
+            className={`absolute border ${
+              hoveredPosition === position.id ? 'border-blue-400' : 'border-gray-600'
+            } rounded`}
+            style={{
+              top: `${position.y}%`,
+              left: `${position.x}%`,
+              width: '60px',
+              height: '60px',
+              transform: 'translate(-50%, -50%)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor:
+                hoveredPosition === position.id ? 'rgba(59, 130, 246, 0.5)' : 'transparent',
+            }}
+          >
+            {character ? (
+              <DraggableFieldCharacter
+                character={character}
+                moveCharacter={moveCharacter}
+                from="field"
               />
-              <button
-                onClick={() => removeCharacter(fieldCharacters.find((c) => c.position.id === position.id).id)}
-                className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700"
-              >
-                Remove
-              </button>
-            </div>
-          ) : (
-            <span className="text-gray-400">{position.name}</span>
-          )}
-        </div>
-      ))}
+            ) : (
+              <span className="text-gray-400">{position.name}</span>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const DraggableFieldCharacter = ({ character, moveCharacter, from }) => {
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: 'character',
+    item: { character, from },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }));
+
+  return (
+    <div
+      ref={drag}
+      className={`flex flex-col items-center ${
+        isDragging ? 'opacity-50' : ''
+      }`}
+    >
+      <img
+        src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+        alt={character.name}
+        className="w-12 h-12 rounded mb-2"
+      />
     </div>
   );
 };

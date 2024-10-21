@@ -2,11 +2,27 @@
 "use client";
 
 import React from 'react';
-import { useDrag } from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 
-const Sideline = ({ characters, removeFromSideline }) => {
+const Sideline = ({ characters, moveCharacter, removeFromSideline }) => {
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: 'character',
+    drop: (item, monitor) => {
+      const { character, from } = item;
+      moveCharacter(character, from, 'sideline');
+    },
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+    }),
+  }));
+
   return (
-    <div className="bg-gray-700 p-4 rounded shadow-md min-h-[400px]">
+    <div
+      ref={drop}
+      className={`bg-gray-700 p-4 rounded shadow-md min-h-[400px] ${
+        isOver ? 'bg-gray-600' : ''
+      }`}
+    >
       <h2 className="text-2xl font-bold text-center mb-4">Sideline</h2>
       {characters.length > 0 ? (
         <div className="flex flex-col gap-4">
@@ -14,7 +30,8 @@ const Sideline = ({ characters, removeFromSideline }) => {
             <DraggableCharacter
               key={character.id}
               character={character}
-              removeFromSideline={removeFromSideline}
+              from="sideline"
+              removeFromSideline={removeFromSideline} // Pass the function here
             />
           ))}
         </div>
@@ -25,10 +42,10 @@ const Sideline = ({ characters, removeFromSideline }) => {
   );
 };
 
-const DraggableCharacter = ({ character, removeFromSideline }) => {
+const DraggableCharacter = ({ character, from, removeFromSideline }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'character',
-    item: { character },
+    item: { character, from },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -51,7 +68,7 @@ const DraggableCharacter = ({ character, removeFromSideline }) => {
         onClick={() => removeFromSideline(character.id)}
         className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700 ml-auto"
       >
-        X
+        Remove
       </button>
     </div>
   );

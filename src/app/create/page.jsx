@@ -1,3 +1,4 @@
+// src/app/create/page.jsx
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -12,6 +13,7 @@ const CreatePage = () => {
   const [characters, setCharacters] = useState([]);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
   const [sidelineCharacters, setSidelineCharacters] = useState([]); // Sideline state
+  const [fieldCharacters, setFieldCharacters] = useState([]); // Field state
   const [currentPage, setCurrentPage] = useState(1);
   const charactersPerPage = 4;
 
@@ -30,8 +32,12 @@ const CreatePage = () => {
     fetchCharacters();
   }, []);
 
-  // Add character to sideline
+  // Add character to sideline (limited to 10)
   const addToSideline = (character) => {
+    if (sidelineCharacters.length >= 10) {
+      alert("Sideline is full. Maximum 10 characters allowed.");
+      return; // Limit sideline to 10 elements
+    }
     setSidelineCharacters((prev) => {
       // Avoid adding duplicate characters
       if (prev.find((c) => c.id === character.id)) {
@@ -44,6 +50,43 @@ const CreatePage = () => {
   // Remove character from sideline
   const removeFromSideline = (characterId) => {
     setSidelineCharacters((prev) => prev.filter((c) => c.id !== characterId));
+  };
+
+  // Function to move character between field and sideline
+  const moveCharacter = (character, from, to) => {
+    if (from === to) {
+      return; // No movement needed
+    }
+
+    if (from === 'sideline') {
+      setSidelineCharacters((prev) => prev.filter((c) => c.id !== character.id));
+    } else if (from === 'field') {
+      setFieldCharacters((prev) => prev.filter((c) => c.id !== character.id));
+    }
+
+    if (to === 'sideline') {
+      if (sidelineCharacters.length >= 10) {
+        alert("Sideline is full. Maximum 10 characters allowed.");
+        return;
+      }
+      setSidelineCharacters((prev) => {
+        if (prev.find((c) => c.id === character.id)) {
+          return prev;
+        }
+        return [...prev, character];
+      });
+    } else if (to === 'field') {
+      if (fieldCharacters.length >= 10) {
+        alert("Field is full. Maximum 10 characters allowed.");
+        return;
+      }
+      setFieldCharacters((prev) => {
+        if (prev.find((c) => c.id === character.id)) {
+          return prev;
+        }
+        return [...prev, character];
+      });
+    }
   };
 
   // Calculate the current set of characters to be displayed for pagination
@@ -71,11 +114,18 @@ const CreatePage = () => {
         <div className="container mx-auto flex gap-6">
           {/* Field Area */}
           <div className="flex-grow bg-gray-800 p-4 rounded-lg">
-            <Field />
+            <Field
+              fieldCharacters={fieldCharacters}
+              moveCharacter={moveCharacter}
+            />
           </div>
           {/* Sideline Area */}
           <div className="w-1/4 bg-gray-700 p-4 rounded-lg">
-            <Sideline characters={sidelineCharacters} removeFromSideline={removeFromSideline} />
+            <Sideline
+              characters={sidelineCharacters}
+              moveCharacter={moveCharacter}
+              removeFromSideline={removeFromSideline} // Pass the function here
+            />
           </div>
         </div>
 
