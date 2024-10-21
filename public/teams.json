@@ -172,5 +172,92 @@
     ],
     "timestamp": "2024-10-21T06:37:31.749Z",
     "id": "5088052b-027c-4edf-8eae-1f31f2afe145"
+  },
+  {
+    "teamName": "Team3",
+    "fieldCharacters": [
+      {
+        "id": 1009144,
+        "name": "A.I.M.",
+        "description": "AIM is a terrorist organization bent on destroying the world.",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/6/20/52602f21f29ec",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 9,
+          "name": "ST",
+          "x": 50,
+          "y": 30
+        }
+      },
+      {
+        "id": 1017100,
+        "name": "A-Bomb (HAS)",
+        "description": "Rick Jones has been Hulk's best bud since day one, but now he's more than a friend...he's a teammate! Transformed by a Gamma energy explosion, A-Bomb's thick, armored skin is just as strong and powerful as it is blue. And when he curls into action, he uses it like a giant bowling ball of destruction! ",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 6,
+          "name": "MD",
+          "x": 50,
+          "y": 50
+        }
+      },
+      {
+        "id": 1009610,
+        "name": "Spider-Man (Peter Parker)",
+        "description": "Bitten by a radioactive spider, high school student Peter Parker gained the speed, strength and powers of a spider. Adopting the name Spider-Man, Peter hoped to start a career using his new abilities. Taught that with great power comes great responsibility, Spidey has vowed to use his powers to help people.",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 1,
+          "name": "GK",
+          "x": 50,
+          "y": 90
+        }
+      },
+      {
+        "id": 1017303,
+        "name": "Hulk (Marvel: Avengers Alliance)",
+        "description": "",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/6/b0/5239b5d891fc1",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 3,
+          "name": "DF",
+          "x": 50,
+          "y": 70
+        }
+      },
+      {
+        "id": 1011360,
+        "name": "Red Hulk",
+        "description": "",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/5/90/5102cb7fc1262",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 4,
+          "name": "DF",
+          "x": 80,
+          "y": 70
+        }
+      }
+    ],
+    "timestamp": "2024-10-21T06:52:50.986Z",
+    "id": "719041d6-68db-42a1-b16a-746714fe6ba5"
   }
 ]

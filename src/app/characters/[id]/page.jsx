@@ -45,7 +45,7 @@ const CharacterDetailPage = () => {
   return (
     <div className="bg-gray-900 min-h-screen p-4">
       <div className="container mx-auto">
-        <h1 className="text-4xl font-bold text-white mb-6">{character.name}</h1>
+        <h1 className="text-4xl font-bold text-center text-white mb-6">{character.name}</h1>
         <img
           src={getImageUrl(character.thumbnail)}
           alt={character.name}

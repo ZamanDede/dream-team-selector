@@ -24,7 +24,7 @@ const TeamsPage = () => {
   return (
     <div className="bg-gray-900 min-h-screen p-4">
       <div className="container mx-auto">
-        <h1 className="text-4xl font-bold text-white mb-6">Saved Teams</h1>
+        <h1 className="text-4xl font-bold text-center text-white mb-6">Saved Teams</h1>
         {teams.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {teams.map((team) => (
