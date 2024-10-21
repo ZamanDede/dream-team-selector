@@ -35,6 +35,11 @@ const CreatePage = () => {
     fetchCharacters();
   }, []);
 
+  // Reset currentPage to 1 whenever filteredCharacters change (e.g., on search or sort)
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filteredCharacters]);
+
   // Add character to selectedCharacters (limit total to 12)
   const addToSelectedCharacters = (character) => {
     const sidelineCharacters = selectedCharacters.filter((c) => c.location === 'sideline');
@@ -133,22 +138,56 @@ const CreatePage = () => {
   const fieldCharacters = selectedCharacters.filter((c) => c.location === 'field');
   const sidelineCharacters = selectedCharacters.filter((c) => c.location === 'sideline');
 
+  // Calculate total pages
+  const totalPages = Math.ceil(filteredCharacters.length / charactersPerPage);
+
   // Calculate the current set of characters to be displayed for pagination
   const indexOfLastCharacter = currentPage * charactersPerPage;
   const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
   const currentCharacters = filteredCharacters.slice(indexOfFirstCharacter, indexOfLastCharacter);
 
+  // Function to generate page numbers for pagination
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    const maxPageNumbersToShow = 5; // Number of page links to show
+    let startPage = Math.max(1, currentPage - Math.floor(maxPageNumbersToShow / 2));
+    let endPage = startPage + maxPageNumbersToShow - 1;
+
+    if (endPage > totalPages) {
+      endPage = totalPages;
+      startPage = Math.max(1, endPage - maxPageNumbersToShow + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
+
+    return pageNumbers;
+  };
+
   // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   const handleNextPage = () => {
-    if (currentPage < Math.ceil(filteredCharacters.length / charactersPerPage)) {
-      setCurrentPage(currentPage + 1);
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
     }
   };
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      setCurrentPage((prevPage) => prevPage - 1);
     }
+  };
+
+  const handleFirstPage = () => {
+    setCurrentPage(1);
+  };
+
+  const handleLastPage = () => {
+    setCurrentPage(totalPages);
   };
 
   // Handle team save or finalize
@@ -183,8 +222,6 @@ const CreatePage = () => {
 
       if (response.ok) {
         setSaveMessage('Team saved successfully!');
-        // Optionally redirect to the team's page
-        // router.push(`/teams/${result.id}`);
         // Reset team name and close modal after a delay
         setTimeout(() => {
           setTeamName('');
@@ -227,7 +264,10 @@ const CreatePage = () => {
 
         {/* Character Search component to filter and sort characters */}
         <div className="my-6">
-          <CharacterSearch characters={characters} setFilteredCharacters={setFilteredCharacters} />
+          <CharacterSearch
+            characters={characters}
+            setFilteredCharacters={setFilteredCharacters}
+          />
         </div>
 
         {/* Display Character Cards */}
@@ -243,31 +283,72 @@ const CreatePage = () => {
         </div>
 
         {/* Pagination Controls */}
-        <div className="flex justify-center items-center space-x-4 mt-8">
+        <div className="flex justify-center items-center space-x-2 mt-8">
+          {/* First Page Button */}
           <button
-            onClick={handlePreviousPage}
+            onClick={handleFirstPage}
             disabled={currentPage === 1}
-            className={`px-4 py-2 rounded ${
+            className={`px-3 py-2 rounded ${
               currentPage === 1
                 ? 'bg-gray-400 cursor-not-allowed'
                 : 'bg-blue-500 hover:bg-blue-700 text-white'
             }`}
           >
-            Previous
+            First
           </button>
-          <span className="text-lg font-bold text-white">
-            Page {currentPage} of {Math.ceil(filteredCharacters.length / charactersPerPage)}
-          </span>
+
+          {/* Previous Page Button */}
+          <button
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+            className={`px-3 py-2 rounded ${
+              currentPage === 1
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-blue-500 hover:bg-blue-700 text-white'
+            }`}
+          >
+            Prev
+          </button>
+
+          {/* Page Number Buttons */}
+          {getPageNumbers().map((pageNumber) => (
+            <button
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              className={`px-3 py-2 rounded ${
+                currentPage === pageNumber
+                  ? 'bg-blue-700 text-white'
+                  : 'bg-blue-500 hover:bg-blue-700 text-white'
+              }`}
+            >
+              {pageNumber}
+            </button>
+          ))}
+
+          {/* Next Page Button */}
           <button
             onClick={handleNextPage}
-            disabled={currentPage === Math.ceil(filteredCharacters.length / charactersPerPage)}
-            className={`px-4 py-2 rounded ${
-              currentPage === Math.ceil(filteredCharacters.length / charactersPerPage)
+            disabled={currentPage === totalPages}
+            className={`px-3 py-2 rounded ${
+              currentPage === totalPages
                 ? 'bg-gray-400 cursor-not-allowed'
                 : 'bg-blue-500 hover:bg-blue-700 text-white'
             }`}
           >
             Next
+          </button>
+
+          {/* Last Page Button */}
+          <button
+            onClick={handleLastPage}
+            disabled={currentPage === totalPages}
+            className={`px-3 py-2 rounded ${
+              currentPage === totalPages
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-blue-500 hover:bg-blue-700 text-white'
+            }`}
+          >
+            Last
           </button>
         </div>
 

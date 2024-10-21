@@ -259,5 +259,353 @@
     ],
     "timestamp": "2024-10-21T06:52:50.986Z",
     "id": "719041d6-68db-42a1-b16a-746714fe6ba5"
+  },
+  {
+    "teamName": "Team 4",
+    "fieldCharacters": [
+      {
+        "id": 1009144,
+        "name": "A.I.M.",
+        "description": "AIM is a terrorist organization bent on destroying the world.",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/6/20/52602f21f29ec",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 9,
+          "name": "ST",
+          "x": 50,
+          "y": 30
+        }
+      },
+      {
+        "id": 1017100,
+        "name": "A-Bomb (HAS)",
+        "description": "Rick Jones has been Hulk's best bud since day one, but now he's more than a friend...he's a teammate! Transformed by a Gamma energy explosion, A-Bomb's thick, armored skin is just as strong and powerful as it is blue. And when he curls into action, he uses it like a giant bowling ball of destruction! ",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 3,
+          "name": "DF",
+          "x": 50,
+          "y": 70
+        }
+      },
+      {
+        "id": 1011297,
+        "name": "Agent Brand",
+        "description": "",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/4/60/52695285d6e7e",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 6,
+          "name": "MD",
+          "x": 50,
+          "y": 50
+        }
+      },
+      {
+        "id": 1009146,
+        "name": "Abomination (Emil Blonsky)",
+        "description": "Formerly known as Emil Blonsky, a spy of Soviet Yugoslavian origin working for the KGB, the Abomination gained his powers after receiving a dose of gamma radiation similar to that which transformed Bruce Banner into the incredible Hulk.",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/9/50/4ce18691cbf04",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 1,
+          "name": "GK",
+          "x": 50,
+          "y": 90
+        }
+      },
+      {
+        "id": 1010354,
+        "name": "Adam Warlock",
+        "description": "Adam Warlock is an artificially created human who was born in a cocoon at a scientific complex called The Beehive.",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/a/f0/5202887448860",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 7,
+          "name": "MD",
+          "x": 80,
+          "y": 50
+        }
+      }
+    ],
+    "timestamp": "2024-10-21T07:05:11.778Z",
+    "id": "ae98cf83-1c9b-4cbb-927a-1f0b9b08813f"
+  },
+  {
+    "teamName": "TestTeam",
+    "fieldCharacters": [
+      {
+        "id": 1009144,
+        "name": "A.I.M.",
+        "description": "AIM is a terrorist organization bent on destroying the world.",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/6/20/52602f21f29ec",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 3,
+          "name": "DF",
+          "x": 50,
+          "y": 70
+        }
+      },
+      {
+        "id": 1017100,
+        "name": "A-Bomb (HAS)",
+        "description": "Rick Jones has been Hulk's best bud since day one, but now he's more than a friend...he's a teammate! Transformed by a Gamma energy explosion, A-Bomb's thick, armored skin is just as strong and powerful as it is blue. And when he curls into action, he uses it like a giant bowling ball of destruction! ",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 10,
+          "name": "ST",
+          "x": 80,
+          "y": 30
+        }
+      },
+      {
+        "id": 1014990,
+        "name": "Alice",
+        "description": "",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/6/70/4cd061e6d6573",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 1,
+          "name": "GK",
+          "x": 50,
+          "y": 90
+        }
+      },
+      {
+        "id": 1010836,
+        "name": "Alex Power",
+        "description": "",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/9/50/4ce5a385a2e82",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 6,
+          "name": "MD",
+          "x": 50,
+          "y": 50
+        }
+      },
+      {
+        "id": 1011176,
+        "name": "Ajak",
+        "description": "",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/2/80/4c002f35c5215",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 9,
+          "name": "ST",
+          "x": 50,
+          "y": 30
+        }
+      }
+    ],
+    "timestamp": "2024-10-21T07:09:28.003Z",
+    "id": "24cf5eaa-6550-4c02-81b9-253a7324d354"
+  },
+  {
+    "teamName": "TestTeam",
+    "fieldCharacters": [
+      {
+        "id": 1009144,
+        "name": "A.I.M.",
+        "description": "AIM is a terrorist organization bent on destroying the world.",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/6/20/52602f21f29ec",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 3,
+          "name": "DF",
+          "x": 50,
+          "y": 70
+        }
+      },
+      {
+        "id": 1017100,
+        "name": "A-Bomb (HAS)",
+        "description": "Rick Jones has been Hulk's best bud since day one, but now he's more than a friend...he's a teammate! Transformed by a Gamma energy explosion, A-Bomb's thick, armored skin is just as strong and powerful as it is blue. And when he curls into action, he uses it like a giant bowling ball of destruction! ",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 10,
+          "name": "ST",
+          "x": 80,
+          "y": 30
+        }
+      },
+      {
+        "id": 1014990,
+        "name": "Alice",
+        "description": "",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/6/70/4cd061e6d6573",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 1,
+          "name": "GK",
+          "x": 50,
+          "y": 90
+        }
+      },
+      {
+        "id": 1010836,
+        "name": "Alex Power",
+        "description": "",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/9/50/4ce5a385a2e82",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 6,
+          "name": "MD",
+          "x": 50,
+          "y": 50
+        }
+      },
+      {
+        "id": 1011176,
+        "name": "Ajak",
+        "description": "",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/2/80/4c002f35c5215",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 9,
+          "name": "ST",
+          "x": 50,
+          "y": 30
+        }
+      }
+    ],
+    "timestamp": "2024-10-21T07:09:47.902Z",
+    "id": "ee84e425-3ddd-4819-ac4a-516bfa8d0c70"
+  },
+  {
+    "teamName": "NewTeam",
+    "fieldCharacters": [
+      {
+        "id": 1009144,
+        "name": "A.I.M.",
+        "description": "AIM is a terrorist organization bent on destroying the world.",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/6/20/52602f21f29ec",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 9,
+          "name": "ST",
+          "x": 50,
+          "y": 30
+        }
+      },
+      {
+        "id": 1011334,
+        "name": "3-D Man",
+        "description": "",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 3,
+          "name": "DF",
+          "x": 50,
+          "y": 70
+        }
+      },
+      {
+        "id": 1009146,
+        "name": "Abomination (Emil Blonsky)",
+        "description": "Formerly known as Emil Blonsky, a spy of Soviet Yugoslavian origin working for the KGB, the Abomination gained his powers after receiving a dose of gamma radiation similar to that which transformed Bruce Banner into the incredible Hulk.",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/9/50/4ce18691cbf04",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 7,
+          "name": "MD",
+          "x": 80,
+          "y": 50
+        }
+      },
+      {
+        "id": 1011176,
+        "name": "Ajak",
+        "description": "",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/2/80/4c002f35c5215",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 6,
+          "name": "MD",
+          "x": 50,
+          "y": 50
+        }
+      },
+      {
+        "id": 1011136,
+        "name": "Air-Walker (Gabriel Lan)",
+        "description": "",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/a/c0/66f2d68d99dc8",
+          "extension": "jpg"
+        },
+        "location": "field",
+        "position": {
+          "id": 1,
+          "name": "GK",
+          "x": 50,
+          "y": 90
+        }
+      }
+    ],
+    "timestamp": "2024-10-21T07:29:27.565Z",
+    "id": "8b80fe4b-0c9e-493c-9f00-2e7600c0fc3e"
   }
 ]

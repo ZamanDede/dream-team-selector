@@ -26,22 +26,61 @@ const CharactersPage = () => {
     fetchCharacters();
   }, []);
 
+  // Reset currentPage to 1 whenever filteredCharacters change (e.g., on search or sort)
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filteredCharacters]);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(filteredCharacters.length / charactersPerPage);
+
   // Calculate the current set of characters to be displayed
   const indexOfLastCharacter = currentPage * charactersPerPage;
   const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
   const currentCharacters = filteredCharacters.slice(indexOfFirstCharacter, indexOfLastCharacter);
 
+  // Function to generate page numbers for pagination
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    const maxPageNumbersToShow = 5; // Number of page links to show
+    let startPage = Math.max(1, currentPage - Math.floor(maxPageNumbersToShow / 2));
+    let endPage = startPage + maxPageNumbersToShow - 1;
+
+    if (endPage > totalPages) {
+      endPage = totalPages;
+      startPage = Math.max(1, endPage - maxPageNumbersToShow + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
+
+    return pageNumbers;
+  };
+
   // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   const handleNextPage = () => {
-    if (currentPage < Math.ceil(filteredCharacters.length / charactersPerPage)) {
-      setCurrentPage(currentPage + 1);
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
     }
   };
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      setCurrentPage((prevPage) => prevPage - 1);
     }
+  };
+
+  const handleFirstPage = () => {
+    setCurrentPage(1);
+  };
+
+  const handleLastPage = () => {
+    setCurrentPage(totalPages);
   };
 
   return (
@@ -56,6 +95,7 @@ const CharactersPage = () => {
         />
       </div>
 
+      {/* Display Character Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
         {currentCharacters.map((character) => (
           <CharacterCard
@@ -67,29 +107,72 @@ const CharactersPage = () => {
       </div>
 
       {/* Pagination Controls */}
-      <div className="flex justify-center items-center space-x-4 mt-8">
+      <div className="flex justify-center items-center space-x-2 mt-8">
+        {/* First Page Button */}
+        <button
+          onClick={handleFirstPage}
+          disabled={currentPage === 1}
+          className={`px-3 py-2 rounded ${
+            currentPage === 1
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-blue-500 hover:bg-blue-700 text-white'
+          }`}
+        >
+          First
+        </button>
+
+        {/* Previous Page Button */}
         <button
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
-          className={`px-4 py-2 rounded ${
-            currentPage === 1 ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700 text-white'
+          className={`px-3 py-2 rounded ${
+            currentPage === 1
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-blue-500 hover:bg-blue-700 text-white'
           }`}
         >
-          Previous
+          Prev
         </button>
-        <span className="text-lg font-bold text-white">
-          Page {currentPage} of {Math.ceil(filteredCharacters.length / charactersPerPage)}
-        </span>
+
+        {/* Page Number Buttons */}
+        {getPageNumbers().map((pageNumber) => (
+          <button
+            key={pageNumber}
+            onClick={() => handlePageChange(pageNumber)}
+            className={`px-3 py-2 rounded ${
+              currentPage === pageNumber
+                ? 'bg-blue-700 text-white'
+                : 'bg-blue-500 hover:bg-blue-700 text-white'
+            }`}
+          >
+            {pageNumber}
+          </button>
+        ))}
+
+        {/* Next Page Button */}
         <button
           onClick={handleNextPage}
-          disabled={currentPage === Math.ceil(filteredCharacters.length / charactersPerPage)}
-          className={`px-4 py-2 rounded ${
-            currentPage === Math.ceil(filteredCharacters.length / charactersPerPage)
+          disabled={currentPage === totalPages}
+          className={`px-3 py-2 rounded ${
+            currentPage === totalPages
               ? 'bg-gray-400 cursor-not-allowed'
               : 'bg-blue-500 hover:bg-blue-700 text-white'
           }`}
         >
           Next
+        </button>
+
+        {/* Last Page Button */}
+        <button
+          onClick={handleLastPage}
+          disabled={currentPage === totalPages}
+          className={`px-3 py-2 rounded ${
+            currentPage === totalPages
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-blue-500 hover:bg-blue-700 text-white'
+          }`}
+        >
+          Last
         </button>
       </div>
     </div>
