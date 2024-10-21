@@ -8,7 +8,7 @@ const CharactersPage = () => {
   const [characters, setCharacters] = useState([]);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const charactersPerPage = 8;
+  const charactersPerPage = 12;
 
   useEffect(() => {
     // Fetch data from public/characters.json
