@@ -26,6 +26,8 @@ const CharacterSearch = ({ characters, setFilteredCharacters, refreshCharacters 
       return false;
     });
 
+
+
     // Sort characters based on name and sort order
     filtered.sort((a, b) => {
       if (sortOrder === "asc") {
